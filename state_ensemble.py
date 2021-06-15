@@ -22,7 +22,7 @@ URL_UNITS = {"blocks": "BLOCK",
              "counties": "COUNTY"}
 DEFAULT_COLS = [
     # pop
-    "TOTPOP", "NH_WHITE", "NH_BLACK", "NH_AMIN ", "NH_ASIAN", "NH_NHPI", "NH_OTHER", "NH_2MORE",
+    "TOTPOP", "NH_WHITE", "NH_BLACK", "NH_AMIN", "NH_ASIAN", "NH_NHPI", "NH_OTHER", "NH_2MORE",
     "HISP", "H_WHITE", "H_BLACK", "H_AMIN", "H_ASIAN", "H_NHPI", "H_OTHER", "H_2MORE",
     # vap
     "VAP", "HVAP", "WVAP", "BVAP", "AMINVAP", "ASIANVAP", "NHPIVAP", "OTHERVAP", "2MOREVAP",
@@ -70,7 +70,7 @@ class DualGraph:
 class StateEnsemble:
     def __init__(self, dual_graph, num_districts, epsilon, pop_col="TOTPOP",
                  verbose=False, initital_partition=None, custom_updaters=None,
-                 plan_scores=[], district_scores=[]):
+                 plan_scores=[], district_scores=[], tract_census_cols=False):
         self.graph = dual_graph
         self.pop_col = pop_col
         self.num_districts = num_districts
@@ -79,10 +79,18 @@ class StateEnsemble:
         self.custom_updaters = custom_updaters
         self.plan_scores = plan_scores
         self.district_scores = district_scores
+        self.tract_census_cols = tract_census_cols
 
         if self.init_partition is None:
             self.init_partition = self.graph.init_partition(num_districts, epsilon, pop_col,
                                                             updaters=custom_updaters)
+        
+        if self.tract_census_cols:
+            census_updaters = {k: Tally(k) for k in DEFAULT_COLS}
+            self.init_partition.updaters.update(census_updaters)
+            self.district_scores += DEFAULT_COLS
+
+
 
     def save_partition(self, assignment, plan_number, saving_file_dir_path):
         partition_json = []
@@ -132,21 +140,22 @@ class StateEnsemble:
             ensemble_record = {"rng_seed": i, 
                                "initial_plan": self.save_partition(part.assignment, i*saving_interval, 
                                                                    saving_file_dir_path),
-                               "ensemble": []}
+                               "ensemble_stats": []}
             random.seed(i)
             chain = self.set_up_chain(saving_interval, part, compactness=compactness, 
                                       accept_func=accept_fun)
             
-            for part in chain:
+            for j,part in enumerate(chain):
                 plan_scores = {s: part[s] for s in self.plan_scores}
                 district_scores = {s: part[s] for s in self.district_scores}
 
                 plan_scores["num_cut_edges"] = len(part["cut_edges"])
 
-                part_record = {"plan_scores": plan_scores,
+                part_record = {"id": i*saving_interval + j,
+                               "plan_scores": plan_scores,
                                "district_scores": district_scores}
                 
-                ensemble_record["ensemble"].append(part_record)
+                ensemble_record["ensemble_stats"].append(part_record)
 
             fout_str = "{}/plans_{}_{}.json".format(saving_file_dir_path, i*saving_interval, (i+1)*saving_interval-1)
             with open(fout_str, "w") as fout:
