@@ -1,0 +1,306 @@
+{
+  "rng_seed": 0,
+  "initial_plan": "data/plan_0_assignment.json",
+  "ensemble": [
+    {
+      "plan_scores": {
+        "num_cut_edges": 339
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 340
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 252
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 249
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 265
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 323
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 310
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 246
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 271
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 281
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 493
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 411
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 456
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 625
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 323
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 341
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 271
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 361
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 271
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 274
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 323
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 274
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 292
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 344
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 420
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 545
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 463
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 506
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 503
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 508
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 527
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 500
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 338
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 371
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 363
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 385
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 473
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 469
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 411
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 349
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 348
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 349
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 325
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 380
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 326
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 380
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 586
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 306
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 437
+      },
+      "district_scores": {}
+    },
+    {
+      "plan_scores": {
+        "num_cut_edges": 390
+      },
+      "district_scores": {}
+    }
+  ]
+}
