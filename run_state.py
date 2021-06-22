@@ -21,13 +21,17 @@ parser.add_argument("saving_interval", metavar="saving_interval", type=int,
                     help="How often to save plans/plan stats")
 parser.add_argument("map", metavar="district_type", type=str,
                     help="What kind of districts to draw?",
-                    choices=["congress", "state_senate"])
+                    choices=["congress10", "congress20", "state_senate"])
 args = parser.parse_args()
 
 fips_code = STATES[args.state]["STFIPS"]
-num_dists = STATES[args.state]["Districts"][args.map]
-eps = 0.02 if args.map == "congress" else 0.05
 
+eps = 0.02 if args.map in ["congress10", "congress20"] else 0.05
+
+try:
+    num_dists = STATES[args.state]["Districts"][args.map]
+except:
+    print("District type ({}) not found for state {}.".format(args.state, args.map))
 
 df = pd.read_csv("acs19_by_state/{}_acs_19_data.csv".format(args.state))
 df = df.rename(columns={"GEOID": "GEOID10"})
