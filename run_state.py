@@ -41,5 +41,5 @@ updaters = {k: Tally(k) for k in ACS_COLS}
 ensemble = StateEnsemble(graph, num_dists, eps, pop_col="TOTPOP19",custom_updaters=updaters,
                          track_census_cols=True, district_scores=ACS_COLS)
 
-ensemble.run_chain(args.iters, args.saving_interval, 
+ensemble.run_chain(args.iters, args.saving_interval, verbose=True,
                    saving_file_dir_path="data/{}/{}".format(args.state, args.map))
