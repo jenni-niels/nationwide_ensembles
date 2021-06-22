@@ -14,6 +14,7 @@ import requests
 import json
 from networkx.readwrite import json_graph
 import warnings
+import tqdm
 
 URL = "https://people.csail.mit.edu/ddeford/{0}/{0}_{1}.json"
 URL_UNITS = {"blocks": "BLOCK",
@@ -47,7 +48,7 @@ class DualGraph:
         self.graph = self.retrieve_dual_graph()
         self.tot_pop = lambda pop_col: sum([self.graph.nodes()[n][pop_col] for n in self.graph.nodes()])
         self.geoid_col = geoid_col
-        if additional_data:
+        if additional_data is not None:
             self.graph.add_data(additional_data)
 
     def retrieve_dual_graph(self):
@@ -70,7 +71,7 @@ class DualGraph:
 class StateEnsemble:
     def __init__(self, dual_graph, num_districts, epsilon, pop_col="TOTPOP",
                  verbose=False, initital_partition=None, custom_updaters=None,
-                 plan_scores=[], district_scores=[], tract_census_cols=False):
+                 plan_scores=[], district_scores=[], track_census_cols=False):
         self.graph = dual_graph
         self.pop_col = pop_col
         self.num_districts = num_districts
@@ -79,13 +80,13 @@ class StateEnsemble:
         self.custom_updaters = custom_updaters
         self.plan_scores = plan_scores
         self.district_scores = district_scores
-        self.tract_census_cols = tract_census_cols
+        self.track_census_cols = track_census_cols
 
         if self.init_partition is None:
             self.init_partition = self.graph.init_partition(num_districts, epsilon, pop_col,
                                                             updaters=custom_updaters)
         
-        if self.tract_census_cols:
+        if self.track_census_cols:
             census_updaters = {k: Tally(k) for k in DEFAULT_COLS}
             self.init_partition.updaters.update(census_updaters)
             self.district_scores += DEFAULT_COLS
@@ -128,7 +129,7 @@ class StateEnsemble:
                            total_steps=num_steps)
     
     def run_chain(self, total_steps, saving_interval, compactness=True, accept_fun=None, 
-                  saving_file_dir_path=""):
+                  saving_file_dir_path="", verbose=False):
         num_saves = math.ceil(total_steps / saving_interval)
 
         if total_steps % saving_interval != 0:
@@ -157,7 +158,7 @@ class StateEnsemble:
                 
                 ensemble_record["ensemble_stats"].append(part_record)
 
-            fout_str = "{}/plans_{}_{}.json".format(saving_file_dir_path, i*saving_interval, (i+1)*saving_interval-1)
+            fout_str = "{}/plans_{}_{}.json".format(saving_file_dir_path, i*saving_interval, i*saving_interval+j)
             with open(fout_str, "w") as fout:
                 json.dump(ensemble_record, fout, indent=2)
-            print("Saving interval {}".format(i), flush=True)
+            if verbose: print("Saving interval {}".format(i), flush=True)
