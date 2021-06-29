@@ -8,8 +8,10 @@ Not all states have available/stable election so we will use Census geography fo
 * Plan Stats:
   * Cut edges
 * District Stats:
-  * TOTPOP broken down by race and ethnicity
-  * VAP broken down by race and ethnicity
+  * TOTPOP (decennial) broken down by race and ethnicity
+  * VAP (decennial)  broken down by race and ethnicity
+  * TOTPOP19 broken down by race and ethnicity
+  * CVAP19 broken down by race and ethnicity
 
 ## Retraceable Chains
 
@@ -17,7 +19,7 @@ Key Observation: The path of a chain only depends on the two elements of state. 
 
 ### Storage Format
 
-`plans_0_999.json`:
+`plans_0_9999.json`:
 
     {
         "rnd_seed": i,
@@ -26,9 +28,11 @@ Key Observation: The path of a chain only depends on the two elements of state. 
             {
                 "plan_scores": {"cut_edges": n, ... }
                 "district_scores": {
-                    "d0": {"TOTPOP": p_0, "HPOP": p_1, "VAP": v_0, ...},
+                    "TOTPOP": {"d0": p_0, "d1": p_1, ..., "dk": p_k,},
+                    "HISP": {"d0": h_0, "d1": h_1, ..., "dk": h_k,},
                     ...
-                    "dk": {"TOTPOP": p_0', "HPOP": p_1', "VAP": v_0', ...}}
+                    "VAP": {"d0": c_0, "d1": c_1, ..., "dk": c_k,},
+                  }
             }
             ...
         ]

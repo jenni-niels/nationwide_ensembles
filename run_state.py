@@ -28,6 +28,8 @@ fips_code = STATES[args.state]["STFIPS"]
 
 eps = 0.02 if args.map in ["congress10", "congress20"] else 0.05
 
+pop_col = "TOTPOP" if args.map == "congress10" else "TOTPOP19"
+
 try:
     num_dists = STATES[args.state]["Districts"][args.map]
 except:
@@ -38,7 +40,7 @@ df = df.rename(columns={"GEOID": "GEOID10"})
 graph = DualGraph(fips_code, additional_data=df)
 
 updaters = {k: Tally(k) for k in ACS_COLS}
-ensemble = StateEnsemble(graph, num_dists, eps, pop_col="TOTPOP19",custom_updaters=updaters,
+ensemble = StateEnsemble(graph, num_dists, eps, pop_col=pop_col,custom_updaters=updaters,
                          track_census_cols=True, district_scores=ACS_COLS)
 
 ensemble.run_chain(args.iters, args.saving_interval, verbose=True,
