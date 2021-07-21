@@ -3,6 +3,7 @@ import pandas as pd
 from states import STATES
 from state_ensemble import *
 from gerrychain.updaters import Tally
+import sys
 
 ACS_COLS = ['HCVAP19','NHCVAP19','2MORECVAP19','AMINCVAP19','ASIANCVAP19','BCVAP19','NHPICVAP19',
             'WCVAP19','CVAP19','HCPOP19','NHCPOP19','2MORECPOP19','AMINCPOP19','ASIANCPOP19',
@@ -34,9 +35,15 @@ try:
     num_dists = STATES[args.state]["Districts"][args.map]
 except:
     print("District type ({}) not found for state {}.".format(args.state, args.map))
+    sys.exit()
 
-df = pd.read_csv("acs19_by_state/{}_acs_19_data.csv".format(args.state))
-df = df.rename(columns={"GEOID": "GEOID10"})
+try: 
+    df = pd.read_csv("acs19_by_state/{}_acs_19_data.csv".format(args.state))
+    df = df.rename(columns={"GEOID": "GEOID10"})
+except:
+    print("ACS data not available for {}".format(args.state))
+    sys.exit()
+
 graph = DualGraph(fips_code, additional_data=df)
 
 updaters = {k: Tally(k) for k in ACS_COLS}
